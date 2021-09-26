@@ -5,6 +5,11 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+const (
+	mocksTable      = "mocks"
+	headersTable  	= "headers"
+)
+
 type Config struct {
 	Host     string
 	Port     string
