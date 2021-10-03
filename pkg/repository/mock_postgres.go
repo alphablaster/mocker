@@ -34,12 +34,35 @@ func (r *MockPostgres) Create(mock entity.Mock) (int, error) {
 	mockFieldsString := strings.Join(mockFields[:], ", ")
 
 	query := fmt.Sprintf("INSERT INTO %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id",
-		mockFieldsString, mocksTable)
+		mocksTable, mockFieldsString)
 
-	row := r.db.QueryRow(query, mock.Name, mock.Description, mock.Status)
+	row := r.db.QueryRow(
+		query,
+		mock.Name,
+		mock.Description,
+		mock.Status,
+		mock.ContentType,
+		mock.RequestMethod,
+		mock.RoutePath,
+		mock.BodyType,
+		mock.BodyContent,
+		mock.ScriptType,
+		mock.Script,
+		mock.Active,
+		mock.MockOrder,
+	)
 	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}
 
 	return id, nil
+}
+
+func (r *MockPostgres) GetAll() ([]entity.Mock, error) {
+	var mocks []entity.Mock
+
+	query := fmt.Sprintf("SELECT * FROM %s", mocksTable)
+	err := r.db.Select(&mocks, query)
+
+	return mocks, err
 }

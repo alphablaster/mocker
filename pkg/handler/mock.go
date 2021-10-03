@@ -25,8 +25,21 @@ func (h *Handler) createMock(c *gin.Context)  {
 	})
 }
 
-func (h *Handler) getAllMocks(c *gin.Context)  {
+type getAllMocksResponse struct {
+	Data []entity.Mock `json:"data"`
+}
 
+func (h *Handler) getAllMocks(c *gin.Context)  {
+	mocks, err := h.services.Mock.GetAll()
+
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, getAllMocksResponse{
+		Data: mocks,
+	})
 }
 
 func (h *Handler) getMockById(c *gin.Context)  {

@@ -11,6 +11,7 @@ type Authorization interface {
 
 type Mock interface {
 	Create(mock entity.Mock) (int, error)
+	GetAll() ([]entity.Mock, error)
 }
 
 type Header interface {

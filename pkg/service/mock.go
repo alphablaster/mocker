@@ -16,3 +16,7 @@ func NewMockService(repo repository.Mock) *MockService {
 func (s *MockService) Create(list entity.Mock) (int, error) {
 	return s.repo.Create(list)
 }
+
+func (s *MockService) GetAll() ([]entity.Mock, error) {
+	return s.repo.GetAll()
+}
