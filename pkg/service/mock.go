@@ -20,3 +20,7 @@ func (s *MockService) Create(list entity.Mock) (int, error) {
 func (s *MockService) GetAll() ([]entity.Mock, error) {
 	return s.repo.GetAll()
 }
+
+func (s *MockService) Delete(listId int) error {
+	return s.repo.Delete(listId)
+}

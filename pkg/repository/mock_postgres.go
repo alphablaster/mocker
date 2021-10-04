@@ -66,3 +66,10 @@ func (r *MockPostgres) GetAll() ([]entity.Mock, error) {
 
 	return mocks, err
 }
+
+func (r *MockPostgres) Delete(mockId int) error {
+	query := fmt.Sprintf("DELETE FROM %s WHERE id = $1", mocksTable)
+	_, err := r.db.Exec(query, mockId)
+
+	return err
+}

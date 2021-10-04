@@ -1,0 +1,5 @@
+run-db:
+	docker run --name=mocker-db -e POSTGRES_PASSWORD='password' -p 5436:5432 -d --rm postgres
+migrate:
+	migrate -path ./schema -database 'postgres://postgres:password@0.0.0.0:5436/postgres?sslmode=disable' up
+

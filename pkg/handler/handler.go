@@ -28,7 +28,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		mocks.POST("/", h.createMock)
 		mocks.GET("/", h.getAllMocks)
-		mocks.GET("/:id", h.getMockById)
+		mocks.GET("/:id", h.editMock)
 		mocks.PUT("/:id", h.updateMock)
 		mocks.DELETE("/:id", h.deleteMock)
 	}

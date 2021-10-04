@@ -12,6 +12,7 @@ type Authorization interface {
 type Mock interface {
 	Create(mock entity.Mock) (int, error)
 	GetAll() ([]entity.Mock, error)
+	Delete(listId int) error
 }
 
 type Header interface {
